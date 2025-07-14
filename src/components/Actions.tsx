@@ -31,10 +31,13 @@ export const Actions = () => {
           {actionProducts.slice(0, 4).map((product, index) => (
             <li
               key={product.id}
-              className={`${index >= 4 ? "hidden" : ""}
-            ${index >= 3 ? "md:hidden xl:block" : ""}
-            ${index >= 4 ? "xl:hidden" : ""}
-            `}
+              className={
+                index >= 4
+                  ? "hidden xl:block"
+                  : index >= 3
+                    ? "md:hidden xl:block"
+                    : ""
+              }
             >
               <ProductCard {...product} />
             </li>

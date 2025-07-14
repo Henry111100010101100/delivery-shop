@@ -48,18 +48,6 @@ export const TopMenu = () => {
           <span>{label}</span>
         </li>
       ))}
-      {/*<li>*/}
-      {/*  <Link href="/">*/}
-      {/*    <Image*/}
-      {/*      src={iconMenuMobile}*/}
-      {/*      alt="Меню"*/}
-      {/*      width={24}*/}
-      {/*      height={24}*/}
-      {/*      className="object-contain w-6 h-6"*/}
-      {/*    />*/}
-      {/*    <span>Каталог</span>*/}
-      {/*  </Link>*/}
-      {/*</li>*/}
     </ul>
   )
 };
