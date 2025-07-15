@@ -12,12 +12,15 @@ export const ProductCard = ({
   defaultPrice,
   discountPercent,
   rating,
+  categories,
 }: ProductCardProps) => {
+  const isNewProduct = categories.includes('new');
+
   const calculateFinalPrice = (price: number, discount: number): number => discount ? price * (1-discount/100) : price;
   const calculatePriceByCard = (price: number, discount: number) => calculateFinalPrice(price, discount);
 
-  const finalPrice = calculateFinalPrice(defaultPrice, discountPercent);
-  const priceByCard = calculatePriceByCard(finalPrice, DISCOUNT_PERCENT_BY_CARD);
+  const finalPrice = isNewProduct ? defaultPrice : calculateFinalPrice(defaultPrice, discountPercent);
+  const priceByCard = isNewProduct ? defaultPrice : calculatePriceByCard(finalPrice, DISCOUNT_PERCENT_BY_CARD);
 
   const formattedPrice = formatPrice(finalPrice);
   const formattedPriceByCard = formatPrice(priceByCard);
@@ -43,7 +46,7 @@ export const ProductCard = ({
             sizes="24px"
           />
         </button>
-        {discountPercent && (
+        {!!discountPercent && (
           <div className="absolute bg-[#ff6633] py-1 px-2 rounded text-white bottom-2.5 left-2.5">
             {`-${discountPercent}%`}
           </div>
@@ -53,11 +56,11 @@ export const ProductCard = ({
       <div className="flex flex-col justify-between p-2 gap-y-2">
         <div className="flex flex-row justify-between items-end">
           <div className="flex flex-col gap-x-1">
-            <div className="flex flex-row gap-x-1 text-sm md:text-lg font-bold">
+            <div className="flex flex-row gap-x-1 text-sm md:text-lg font-bold text-[#414141]">
               <span>{formattedPriceByCard}</span>
               <span>₽</span>
             </div>
-            {DISCOUNT_PERCENT_BY_CARD > 0 && (
+            {!!DISCOUNT_PERCENT_BY_CARD && !isNewProduct && (
               <p className="text-[#bfbfbf] text-[8px] md:text-xs">С картой</p>
             )}
           </div>
@@ -67,7 +70,7 @@ export const ProductCard = ({
                 <span>{formattedPrice}</span>
                 <span>₽</span>
               </div>
-              <p className="text-[#bfbfbf] text-[8px] md:text-xs">Обычная</p>
+              <p className="text-[#bfbfbf] text-[8px] md:text-xs text-right">Обычная</p>
             </div>
           )}
         </div>
