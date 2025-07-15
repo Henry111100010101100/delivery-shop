@@ -30,7 +30,7 @@ export const ProductCard = ({
           src={img}
           alt="Акция"
           fill
-          className="object-cover md:object-contain"
+          className="object-contain"
           sizes="(max-width: 768px) 160px, (max-width: 1200px) 224px, 272px"
         />
         <button
