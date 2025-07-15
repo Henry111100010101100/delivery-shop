@@ -2,6 +2,7 @@ import Image from 'next/image';
 import iconHeart from '/public/icons/header/icon-heart.svg';
 import { ProductCardProps } from '@/types/product';
 import { formatPrice } from '@/utils/formatPrice';
+import { StarRating } from '@/components/StarRating';
 
 const DISCOUNT_PERCENT_BY_CARD = 6;
 
@@ -12,7 +13,6 @@ export const ProductCard = ({
   discountPercent,
   rating,
 }: ProductCardProps) => {
-
   const calculateFinalPrice = (price: number, discount: number): number => discount ? price * (1-discount/100) : price;
   const calculatePriceByCard = (price: number, discount: number) => calculateFinalPrice(price, discount);
 
@@ -74,7 +74,7 @@ export const ProductCard = ({
         <div className="h-13.5 text-xs md:text-base text-[#414141] line-clamp-3 md:line-clamp-2 leading-[1.5]">
           {description}
         </div>
-        {rating && "Рейтинг"}
+        {rating && <StarRating rating={rating}/>}
         <button
           className="border border-(--color-primary) hover:text-white hover:bg-[#ff6633] hover:border-transparent active:shadow-(--shadow-button-active) w-full h-10 rounded p-2 justify-center items-center text-(--color-primary) transition-all duration-300 cursor-pointer select-none">
           В корзину
