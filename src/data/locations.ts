@@ -5,7 +5,11 @@ export const shopsLocations: Locations = {
     {
       name: 'Ростов-на-Дону',
       center: [47.222043, 39.720120],
-      shops: [{id: 1, coordinates: [47.224926, 39.714841], name: 'Магазин на Пушкинской'}],
+      shops: [
+        {id: 1, coordinates: [47.224926, 39.714841], name: 'Кофейня на Пушкинской'},
+        {id: 6, coordinates: [47.224458, 39.734782], name: 'Кафе на Социалистической'},
+        {id: 7, coordinates: [47.228541, 39.726730], name: 'Читальный зал на Публичке'}
+      ],
     },
   "bataysk":
     {

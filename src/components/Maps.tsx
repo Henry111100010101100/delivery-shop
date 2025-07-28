@@ -11,7 +11,7 @@ export const Maps = () => {
   const currentLocationData = shopsLocations[currentLocation];
 
   return (
-    <YMaps query={{lang:"ru_RU"}}>
+    <YMaps query={{ lang: "ru_RU", load: "geoObject.addon.hint,control.ZoomControl", }}>
       <section>
         <div className="flex flex-col justify-center xl:max-w-[1208px] text-[#414141]">
           <h2 className="mb-4 md:mb-8 xl:mb-10 text-2xl xl:text-4xl text-left font-bold">
@@ -35,11 +35,30 @@ export const Maps = () => {
               );
             })}
           </div>
-            <Map defaultState={{center: currentLocationData.center, zoom: 12}} state={{center: currentLocationData.center, zoom: 12 }}  width="100%" height="354px">
-              <Placemark geometry={[55.684758, 37.738521]}/>
+            <Map
+              defaultState={{center: currentLocationData.center, zoom: 12}}
+              state={{center: currentLocationData.center, zoom: 12 }}
+              width="100%"
+              height="354px"
+            >
+              {shopsLocations[currentLocation].shops.map(shop => (
+                <Placemark
+                  key={shop.id}
+                  geometry={shop.coordinates}
+                  properties={{
+                    hintContent: shop.name,
+
+                  }}
+                  options={{
+                    iconLayout: 'default#image',
+                    iconImageHref: '/icons/maps/icon-placemark.svg',
+                    iconImageSize: [32, 32],
+                  }}
+                />
+              ))}
             </Map>
           </div>
       </section>
     </YMaps>
-);
+  );
 }
