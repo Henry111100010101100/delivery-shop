@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import avatar from '/public/images/graphics/avatar.png';
-import iconArrow from '/public/icons/header/icon-arrow.svg';
+import iconArrow from '/public/icons/icon-arrow.svg';
 
 export const Profile = () => {
   return (

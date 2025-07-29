@@ -1,5 +1,5 @@
 import Image from "next/image";
-import iconArrow from "/public/icons/header/icon-arrow.svg";
+import iconArrow from "/public/icons/icon-arrow.svg";
 import { ProductCard } from "./ProductCard";
 import database from "@/data/database.json";
 
