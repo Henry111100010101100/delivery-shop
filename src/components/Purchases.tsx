@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { JSX } from 'react';
-import iconArrow from "/public/icons/header/icon-arrow.svg";
+import iconArrow from "/public/icons/icon-arrow.svg";
 import database from "@/data/database.json";
 import { PurchasedProductType } from '@/types/purchasedProduct';
 import { ProductCard } from "./ProductCard";
