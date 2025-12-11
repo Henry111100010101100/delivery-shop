@@ -21,6 +21,7 @@ const eslintConfig = [
         varsIgnorePattern: "^_",
         argsIgnorePattern: "^_"
       }],
+      "object-curly-spacing": ["warn", "always"],
     },
   },
 ];
