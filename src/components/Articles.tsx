@@ -2,10 +2,23 @@ import Image from "next/image";
 import Link from "next/link";
 
 import iconArrow from "/public/icons/icon-arrow.svg";
-import articlesDatabase from "@/data/articles.json";
+import { Article } from '@/types/articles';
 
-export const Articles = () => {
-  const articles = articlesDatabase;
+export const Articles = async () => {
+  let articles: Article[] = [];
+  let error = null;
+
+  try {
+    const fetchedArticles = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/api/articles`)
+    articles = await fetchedArticles.json();
+  } catch (e) {
+    error = 'Ошибка при получении статей';
+    console.error('Ошибка в компоненте Articles', e);
+  }
+
+  if (error) {
+    return <div className='text-red-500'>{`${error} в компоненте Articles`}</div>
+  }
 
   return (
     <section>
@@ -30,7 +43,7 @@ export const Articles = () => {
         {/* Список статей */}
         <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6">
           {articles.map((article) => (
-            <li key={article.id} className="h-75 md:h-105">
+            <li key={article._id} className="h-75 md:h-105">
               <article className="bg-white h-full flex flex-col rounded overflow-hidden shadow-(--shadow-card) hover:shadow-(--shadow-article) duration-300">
                 <div className="relative h-48 w-full">
                   <Image
