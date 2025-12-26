@@ -1,12 +1,23 @@
 import Image from "next/image";
 import iconArrow from "/public/icons/icon-arrow.svg";
 import { ProductCard } from "./ProductCard";
-import database from "@/data/database.json";
+import { ProductCardProps } from '@/types/product';
 
-export const Actions = () => {
-  const actionProducts = database.products.filter((product) =>
-    product.categories?.includes("actions")
-  );
+export const Actions = async () => {
+  let products: ProductCardProps[] = [];
+  let error = null;
+
+  try {
+    const fetchedProducts = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/api/products?category=actions`)
+    products = await fetchedProducts.json();
+  } catch (e) {
+    error = 'Ошибка при получении акционных продуктов';
+    console.error('Ошибка в компоненте Actions', e);
+  }
+
+  if (error) {
+    return <div className='text-red-500'>{`${error} в компоненте Actions`}</div>
+  }
 
   return (
     <section>
@@ -28,9 +39,9 @@ export const Actions = () => {
           </button>
         </div>
         <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-10 justify-items-center">
-          {actionProducts.slice(0, 4).map((product, index) => (
+          {products.slice(0, 4).map((product, index) => (
             <li
-              key={product.id}
+              key={product._id}
               className={
                 index >= 4
                   ? "hidden xl:block"
