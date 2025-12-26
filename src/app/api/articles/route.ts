@@ -8,6 +8,6 @@ export async function GET() {
     return NextResponse.json(articles);
   } catch (e) {
     console.error('Ошибка при получении данных с сервера:', e);
-    return NextResponse.json('Ошибка при получении данных с сервера', { status: 500 })
+    return NextResponse.json('Ошибка при получении статей с сервера', { status: 500 })
   }
 }
