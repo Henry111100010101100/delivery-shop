@@ -1,22 +1,25 @@
 import Image from "next/image";
 import { JSX } from 'react';
 import iconArrow from "/public/icons/icon-arrow.svg";
-import database from "@/data/database.json";
 import { PurchasedProductType } from '@/types/purchasedProduct';
 import { ProductCard } from "./ProductCard";
-import { ProductCardProps } from '@/types/product';
 
-export const Purchases = (): JSX.Element => {
-  const userPurchases = database.users[0].purchases.reduce<PurchasedProductType[]>((acc, current) => {
-    const matchedProduct: ProductCardProps | undefined = database.products.find((product) => product.id === current.id);
-    if (matchedProduct) {
-      const {discountPercent: _unused, ...purchasedProduct} = matchedProduct;
-      acc.push(purchasedProduct);
-    }
+export const Purchases = async (): Promise<JSX.Element> => {
 
-    return acc;
+  let purchasedProducts: PurchasedProductType[] = [];
+  let error = null;
 
-  }, []);
+  try {
+    const fetchedPurchases = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/api/users/purchases`);
+    purchasedProducts = await fetchedPurchases.json();
+  } catch (e) {
+    error = 'Ошибка при получении покупок пользователя';
+    console.error('Ошибка в компоненте Purchases', e);
+  }
+
+  if (error) {
+    return <div className='text-red-500'>{`${error} в компоненте Purchases`}</div>
+  }
 
   return (
     <section>
@@ -38,9 +41,9 @@ export const Purchases = (): JSX.Element => {
           </button>
         </div>
         <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-10 justify-items-center">
-          {userPurchases.slice(0, 4).map((product, index) => (
+          {purchasedProducts.slice(0, 4).map((product, index) => (
             <li
-              key={product.id}
+              key={product._id}
               className={
                 index >= 4
                   ? "hidden xl:block"

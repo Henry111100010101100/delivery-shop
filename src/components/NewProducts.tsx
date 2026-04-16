@@ -1,12 +1,23 @@
 import Image from "next/image";
 import iconArrow from "/public/icons/icon-arrow.svg";
 import { ProductCard } from "./ProductCard";
-import database from "@/data/database.json";
+import { ProductCardProps } from '@/types/product';
 
-export const NewProducts = () => {
-  const newProducts = database.products.filter((product) =>
-    product.categories?.includes("new")
-  );
+export const NewProducts = async () => {
+  let newProducts: ProductCardProps[] = [];
+  let error = null;
+
+  try {
+    const fetchedProducts = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/api/products?category=new`)
+    newProducts = await fetchedProducts.json();
+  } catch (e) {
+    error = 'Ошибка при получении новых продуктов';
+    console.error('Ошибка в компоненте NewProducts', e);
+  }
+
+  if (error) {
+    return <div className='text-red-500'>{`${error} в компоненте NewProducts`}</div>
+  }
 
   return (
     <section>
@@ -30,7 +41,7 @@ export const NewProducts = () => {
         <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-10 justify-items-center">
           {newProducts.slice(0, 4).map((product, index) => (
             <li
-              key={product.id}
+              key={product._id}
               className={
                 index >= 4
                   ? "hidden xl:block"
