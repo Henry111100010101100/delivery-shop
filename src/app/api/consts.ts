@@ -1,0 +1,1 @@
+export const REVALIDATION_TIMEOUT = 3600;
