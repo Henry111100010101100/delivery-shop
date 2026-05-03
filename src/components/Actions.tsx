@@ -2,6 +2,7 @@ import Image from "next/image";
 import iconArrow from "/public/icons/icon-arrow.svg";
 import { ProductCard } from "./ProductCard";
 import { ProductCardProps } from '@/types/product';
+import { shuffleArray } from '@/utils/shuffleArray';
 
 export const Actions = async () => {
   let products: ProductCardProps[] = [];
@@ -10,6 +11,7 @@ export const Actions = async () => {
   try {
     const fetchedProducts = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/api/products?category=actions`)
     products = await fetchedProducts.json();
+    products = shuffleArray(products);
   } catch (e) {
     error = 'Ошибка при получении акционных продуктов';
     console.error('Ошибка в компоненте Actions', e);
