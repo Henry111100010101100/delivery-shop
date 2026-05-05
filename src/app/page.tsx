@@ -6,6 +6,8 @@ import { SpecialOffers } from '@/components/SpecialOffers';
 import { Maps } from '@/components/Maps';
 import { Articles } from '@/components/Articles';
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <main className="w-full mx-auto mb-20">

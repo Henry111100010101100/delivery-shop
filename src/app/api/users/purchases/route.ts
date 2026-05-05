@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { getDB } from '@/utils/api-routes';
 import { UserPurchase } from '@/types/purchasedProduct';
 
+export const revalidate = 3600;
+
 export async function GET() {
   try {
     const db = await getDB();

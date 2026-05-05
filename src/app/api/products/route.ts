@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getDB } from '@/utils/api-routes';
 
+export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+
 export async function GET(request: Request) {
   try {
     const category = new URL(request.url).searchParams.get('category');
