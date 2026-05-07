@@ -4,10 +4,14 @@ export interface ProductCardProps {
   img: string;
   title: string;
   description: string;
-  defaultPrice: number;
+  basePrice: number;
   discountPercent?: number;
   categories: string[];
-  rating: number;
+  rating: {
+    rate: number;
+    count: number;
+  };
   weight?: string;
   volume?: string;
+  quantity?: number;
 }

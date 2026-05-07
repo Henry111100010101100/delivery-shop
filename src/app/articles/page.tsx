@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Article } from '@/types/articles';
 import { ViewAllButton } from '@/components/ViewAllButton';
 
-export const Articles = async () => {
+const AllArticles = async () => {
   let articles: Article[] = [];
   let error = null;
 
@@ -11,20 +11,20 @@ export const Articles = async () => {
     const fetchedArticles = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/api/articles`)
     articles = await fetchedArticles.json();
   } catch (e) {
-    error = 'Ошибка при получении статей';
-    console.error('Ошибка в компоненте Articles', e);
+    error = 'Ошибка при получении всех статей';
+    console.error('Ошибка в компоненте AllArticles', e);
   }
 
   if (error) {
-    return <div className='text-red-500'>{`${error} в компоненте Articles`}</div>
+    return <div className='text-red-500'>{`${error} в компоненте AllArticles`}</div>
   }
 
   return (
     <section>
-      <div className="flex flex-col justify-center xl:max-w-[1208px] text-[#414141]">
+      <div className="mt-20 px-[max(12px,calc((100%-1208px)/2))] flex flex-col text-[#414141]">
         <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
-          <h2 className="text-2xl xl:text-4xl text-left font-bold">Статьи</h2>
-          <ViewAllButton btnText="К статьям" href="/articles" imgAlt="К статьям"/>
+          <h2 className="text-2xl xl:text-4xl text-left font-bold">Все статьи</h2>
+          <ViewAllButton btnText={"На главную"} href={"/"} imgAlt={"На главную"}/>
         </div>
 
         {/* Список статей */}
@@ -64,3 +64,5 @@ export const Articles = async () => {
     </section>
   );
 };
+
+export default AllArticles;
