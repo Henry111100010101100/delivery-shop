@@ -9,21 +9,23 @@ const DISCOUNT_PERCENT_BY_CARD = 6;
 export const ProductCard = ({
   img,
   description,
-  defaultPrice,
+  basePrice,
   discountPercent = 0,
   rating,
   categories,
 }: ProductCardProps) => {
-  const isNewProduct = categories.includes('new');
-
   const calculateFinalPrice = (price: number, discount: number): number => discount ? price * (1-discount/100) : price;
   const calculatePriceByCard = (price: number, discount: number) => calculateFinalPrice(price, discount);
 
-  const finalPrice = isNewProduct ? defaultPrice : calculateFinalPrice(defaultPrice, discountPercent);
-  const priceByCard = isNewProduct ? defaultPrice : calculatePriceByCard(finalPrice, DISCOUNT_PERCENT_BY_CARD);
+  const isNewProduct = categories.includes('new');
+
+  const finalPrice = isNewProduct ? basePrice : calculateFinalPrice(basePrice, discountPercent);
+  const priceByCard = isNewProduct ? basePrice : calculatePriceByCard(finalPrice, DISCOUNT_PERCENT_BY_CARD);
 
   const formattedPrice = formatPrice(finalPrice);
   const formattedPriceByCard = formatPrice(priceByCard);
+
+  const ratingValue = rating?.rate || 5;
 
   return (
     <div
@@ -60,11 +62,11 @@ export const ProductCard = ({
               <span>{formattedPriceByCard}</span>
               <span>₽</span>
             </div>
-            {!!DISCOUNT_PERCENT_BY_CARD && !isNewProduct && (
+            {!!DISCOUNT_PERCENT_BY_CARD && (
               <p className="text-[#bfbfbf] text-[8px] md:text-xs">С картой</p>
             )}
           </div>
-          {finalPrice !== defaultPrice && DISCOUNT_PERCENT_BY_CARD > 0 && (
+          {finalPrice !== basePrice && DISCOUNT_PERCENT_BY_CARD > 0 && (
             <div className="flex flex-col gap-x-1">
               <div className="flex flex-row gap-x-1 text-xs md:text-base text-[#606060]">
                 <span>{formattedPrice}</span>
@@ -77,7 +79,7 @@ export const ProductCard = ({
         <div className="h-13.5 text-xs md:text-base text-[#414141] line-clamp-3 md:line-clamp-2 leading-[1.5]">
           {description}
         </div>
-        {rating && <StarRating rating={rating}/>}
+        {rating && <StarRating rating={ratingValue}/>}
         <button
           className="border border-(--color-primary) hover:text-white hover:bg-[#ff6633] hover:border-transparent active:shadow-(--shadow-button-active) w-full h-10 rounded p-2 justify-center items-center text-(--color-primary) transition-all duration-300 cursor-pointer select-none">
           В корзину
