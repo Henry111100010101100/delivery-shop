@@ -8,7 +8,7 @@ export const Articles = async () => {
   let error = null;
 
   try {
-    const fetchedArticles = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/api/articles`)
+    const fetchedArticles = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/api/articles`);
     articles = await fetchedArticles.json();
   } catch (e) {
     error = 'Ошибка при получении статей';
@@ -16,7 +16,7 @@ export const Articles = async () => {
   }
 
   if (error) {
-    return <div className='text-red-500'>{`${error} в компоненте Articles`}</div>
+    return <div className='text-red-500'>{`${error} в компоненте Articles`}</div>;
   }
 
   return (
@@ -24,7 +24,7 @@ export const Articles = async () => {
       <div className="flex flex-col justify-center xl:max-w-[1208px] text-[#414141]">
         <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
           <h2 className="text-2xl xl:text-4xl text-left font-bold">Статьи</h2>
-          <ViewAllButton btnText="К статьям" href="/articles" imgAlt="К статьям"/>
+          <ViewAllButton btnText="К статьям" href="/articles" />
         </div>
 
         {/* Список статей */}
