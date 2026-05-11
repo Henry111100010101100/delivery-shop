@@ -13,7 +13,7 @@ const fetchProducts = async (category: string) => {
 
     return shuffleArray(products);
   } catch (e) {
-    console.error('Ошибка в компоненте', e);
+    console.error(`Ошибка в компоненте: ${category}`, e);
     throw e;
   }
 };
