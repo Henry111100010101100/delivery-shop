@@ -22,6 +22,20 @@ const eslintConfig = [
         argsIgnorePattern: "^_"
       }],
       "object-curly-spacing": ["warn", "always"],
+
+      "max-len": [
+        "warn",
+        {
+          code: 160,
+          tabWidth: 2,
+          ignoreUrls: true,
+          ignoreStrings: true,
+          ignoreTemplateLiterals: true,
+          ignoreComments: false,
+        },
+      ],
+
+      "semi": ["warn", "always"],
     },
   },
 ];
