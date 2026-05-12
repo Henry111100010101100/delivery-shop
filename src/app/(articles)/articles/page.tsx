@@ -1,5 +1,11 @@
 import fetchArticles from '@/app/(articles)/fetchArticles';
 import { ArticlesSection } from '@/app/(articles)/ArticlesSection';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Статьи магазина "Северяночка"',
+  description: 'Читайте статьи на сайте магазина "Северяночка"',
+};
 
 const AllArticles = async () => {
   try {

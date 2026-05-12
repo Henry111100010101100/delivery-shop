@@ -1,5 +1,11 @@
 import fetchProducts from '@/app/(products)/fetchProducts';
 import { ProductsSection } from '@/components/ProductsSection';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Новинки магазина "Северяночка"',
+  description: 'Новые товары магазина "Северяночка", товары по акции магазина "Северяночка"',
+};
 
 const AllNewProducts = async () => {
   try {
