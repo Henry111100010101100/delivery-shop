@@ -11,7 +11,7 @@ export interface ProductCardProps {
     rate: number;
     count: number;
   };
+  quantity: number;
   weight?: string;
   volume?: string;
-  quantity?: number;
 }

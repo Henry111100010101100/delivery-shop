@@ -11,7 +11,11 @@ const fetchProducts = async (category: string) => {
 
     const products: ProductCardProps[] = await res.json();
 
-    return shuffleArray(products);
+    const availableProducts = products.filter(
+      (product) => product.quantity > 0
+    );
+
+    return shuffleArray(availableProducts);
   } catch (e) {
     console.error(`Ошибка в компоненте: ${category}`, e);
     throw e;
