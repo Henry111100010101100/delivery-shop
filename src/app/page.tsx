@@ -1,10 +1,10 @@
 import { Slider } from '@/components/slider/Slider';
-import { Actions } from '@/components/Actions';
-import { NewProducts } from '@/components/NewProducts';
-import { Purchases } from '@/components/Purchases';
+import { Actions } from '@/app/(products)/Actions';
+import { NewProducts } from '@/app/(products)/NewProducts';
+import { Purchases } from '@/app/(user)/Purchases';
 import { SpecialOffers } from '@/components/SpecialOffers';
 import { Maps } from '@/components/Maps';
-import { Articles } from '@/components/Articles';
+import { Articles } from '@/app/(articles)/Articles';
 
 export const dynamic = "force-dynamic";
 
